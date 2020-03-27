@@ -1,5 +1,5 @@
 site:
-  title: "Jinyan.ink · 寒瑾砚"
+  title: "Meink· 轻量级静态博客构建工具"
   subtitle: "Keep It Simple & Stupid"
   limit: 5
   theme: theme
@@ -14,8 +14,8 @@ site:
 
 authors:
   me:
-    name: "寒瑾砚"
-    intro: "HanJinyan"
+    name: "Meink"
+    intro: "Meink"
     avatar: "/author.png"
 
 
@@ -25,6 +25,6 @@ build:
     port: 8080
     copy:
         - "source"
-    publish: |
-        scp -r /home/hanjinyan/app/src/Meink/ root@47.95.7.160:/root
+    publish: | # 需要自己设定目录
+        scp -r /home/hanjinyan/app/src/Meink/ root@你的服务器ip:/目录
 
