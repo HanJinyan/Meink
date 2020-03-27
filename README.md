@@ -18,11 +18,11 @@ go version go1.14 linux/amd64
 >- 注：go mod 模式开启
 
 ### 下载源码
-``` golagn
+``` 
 go get github.com/HanJinyan/Meink
 ```
 ### 编译源码并运行 (Linux)
-```golang
+```
 hanjinyan@hanjinyan:~/app/src/Meink$ go build
 hanjinyan@hanjinyan:~/app/src/Meink$ ./Meink run
 ```
@@ -34,3 +34,13 @@ hanjinyan@hanjinyan:~/app/src/Meink$ ./Meink run
     $ ./Meink init     清空public (用于调试)
     $ ./Meink publish  部署到服务器
     $ ./Meink new      创建文章
+
+### 二次开发
+
+ 欢迎各位爱好者提建议，二次开发，源码交流
+ 
+### 联系我
+
+> QQ : 994205825
+> 微信： HBY205825
+> 邮箱：hby0210@163.com
