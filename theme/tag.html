@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+{{template "head" .}}
+<body>
+    <!--导航栏-->
+    <!-- 页面头部 -->
+    <header class="masthead" style="background-image: url('{{.Site.Root}}/bundle/home-bg.jpg')">
+        <div class="overlay"></div>
+        {{template "header" .}}
+        <div class="container">
+            <div class="row">
+                <div class="col-md mx-auto">
+                    <div class="site-heading">
+                        <span>{{.Site.Subtitle}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+<div class="container">
+    <div class="row">
+        <div class="col-md mx-auto">
+
+        <article class="tag">
+            <header class="site">
+                <span class="title">{{.Site.Title}}</span>
+                <!--        <h2 class="subtitle">{{.Site.Subtitle}}</h2>  -->
+            </header>
+            <header class="header">
+                <span class="title">{{i18n "tag"}} -</span>
+                <span class="subtitle">{{.Total}} {{i18n "articles"}}</span>
+            </header>
+            <div class="tag-list clearfix">
+                {{range .Tag}}
+                <div class="tag-item">
+                    <a class="tag-name" href="{{$.Site.Root}}/tag/{{.Name}}/index.html">{{.Name}}<span
+                            class="tag-count"> ({{.Count}})</span></a>
+                    </div>
+                {{end}}
+            </div>
+        </article>
+    </article>
+<!-- Footer -->
+{{template "footer" .}}
+</body>
+
+</html>

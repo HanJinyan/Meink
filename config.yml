@@ -1,0 +1,30 @@
+site:
+  title: "Jinyan.ink · 寒瑾砚"
+  subtitle: "Keep It Simple & Stupid"
+  limit: 5
+  theme: theme
+  language: zh-cn
+  logo: "/favicon.ico"
+  url: "http://www.jinyan.ink"
+  root: "/Meink"
+  version: "MEINK 1.0.0(bate)"
+  copyright: "你的备案号"
+  link: "{year}{month}{day}{hour}{minute}{second}.html"
+
+
+authors:
+  me:
+    name: "寒瑾砚"
+    intro: "HanJinyan"
+    avatar: "/author.png"
+
+
+build:
+    output: "public"
+    source: "source"
+    port: 8080
+    copy:
+        - "source"
+    publish: |
+        scp -r /home/hanjinyan/app/src/Meink/ root@47.95.7.160:/root
+

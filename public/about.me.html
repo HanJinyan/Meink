@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Jinyan.ink · 寒瑾砚</title>
+    <link href="/bundle/index.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/favicon.ico">
+</head>
+
+    <script type="text/javascript">
+    var conn, reloadTimer, connectTimer;
+    var connect = function() {
+        conn = new WebSocket('ws://' + location.host + '/websocket');
+        conn.onmessage = function(event) {
+            if (event.data === 'change') {
+                if (reloadTimer) clearTimeout(reloadTimer);
+                reloadTimer = setTimeout(function() {
+                    window.location.reload();
+                }, 200);
+            }
+        };
+        conn.onclose = function() {
+            if (connectTimer) clearTimeout(connectTimer);
+            connectTimer = setTimeout(function() {
+                connect();
+            }, 1000);
+        };
+    };
+    connect();
+</script>
+
+<body>
+    
+    <header class="masthead" style="background-image: url('/bundle/home-bg.jpg')">
+        <div class="overlay"></div>
+        <nav class="container">
+    <div class="row">
+        <div class="col-md mx-auto">
+            <nav class="navbar">
+                    <a class="navbar-brand" href="/">Jinyan.ink · 寒瑾砚</a>
+                <ul class="nav justify-content-end">
+                    <li class="nav-item ">
+                        <a class="nav-link " href="/">首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/archive.html">归档</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tag.html">标签</a>
+                    </li>    
+                    <li class="nav-item">
+                        <a  class="nav-link" href="/about.me.html">关于</a>
+                    </li>
+                    <li class="nav-item">
+                        <a  class="nav-link" href="/rss.xml">订阅</a>
+                    </li>
+                </ul>
+            </nav>
+        </div> 
+    </div>
+</nav>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md mx-auto">
+                    <div class="site-heading">
+                        <span>Keep It Simple &amp; Stupid</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md mx-auto">
+            <article class="article">
+                <a class="title">关于</a>
+                <section class="info">
+                    <img class="logo"  style="background-image: url('/author.png');"></img> 
+                    <a class="name" href="/about.me.html">寒瑾砚</a>
+                    
+                    <span class="date"></span>
+                    
+                    <span class="tags"></span>
+                </section>
+                <article class="markdown-body"><h3>Meink</h3>
+
+<p><code>Meink</code>是一个基于Golang的轻量级静态博客构建工具，可以快速搭建博客网站。它无依赖跨平台，配置简单构建快速，以<code>Markdown</code>格式文本输入源，注重简洁易用与更优雅的排版，源码发布于  <a href="https://github.com/HanJinyan/Meink">GitHub</a> 。</p>
+
+<h3>特性介绍</h3>
+
+<ul>
+<li>YAML格式的配置</li>
+<li>Markdown格式的文章</li>
+<li>无依赖跨平台</li>
+<li>超快的构建速度(并发)</li>
+<li>简单，小巧，易用</li>
+</ul>
+
+<h3>关于我</h3>
+
+<p>目前还是在校学生</p>
+
+<p>业余开发者，熟悉Golang</p>
+
+<p>Write bug everyday ! ! ！</p>
+
+<h3>联系我</h3>
+
+<p>刚刚接触<code>web</code>开发的菜鸟，喜欢计算机编程，也在学习。</p>
+
+<blockquote>
+<p>GitHub：<a href="https://github.com/HanJinyan">https://github.com/HanJinyan</a></p>
+
+<p>Email：HBY0210@163.com ，jinyanink@outlook.com</p>
+
+<p>QQ：994205825</p>
+
+<p>微信 ：</p>
+
+<p><img src="../source/wx.png" alt="" /></p>
+</blockquote>
+</article>
+              
+                <section class="author">
+                    <div class="avatar" style="background-image: url(/author.png);"></div>
+                    <a class="name" href="/about.me.html">寒瑾砚</a>
+                    <div class="intro">HanJinyan</div>
+                </section>
+                <section class="recommend">
+                    
+                    
+                </section>
+            </article>
+            </article> 
+            </div>
+        </div>
+    </div>
+</body>
+
+<footer>
+    <div style="border-bottom: 1px dashed #ddd;"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md mx-auto">
+                <div class="text-center footerlogo">
+                    <a href="https://www.github.com/HanJinyan">
+                        <img src="/bundle/github-fill.svg" alt="2" width="32" height="32">
+                    </a>
+                </div>
+                <p href="" class="copyright">Power By &copy; <a class="info"
+                        href="https://www.github.com/HanJinyan/Meink" style="text-decoration:none">MEINK 1.0.0(bate)</a>
+                    <p href="" class="copyright">Copyright &copy;2018-2020| 你的备案号 |<a href="#"
+                            style="text-decoration:none">&copy; Jinyan.ink · 寒瑾砚</a></p>
+
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+</html>
