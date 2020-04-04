@@ -5,7 +5,7 @@
 <body>
     <!--导航栏-->
     <!-- 页面头部 -->
-    <header class="masthead" style="background-image: url('{{.Site.Root}}/bundle/home-bg.jpg')">
+    <header class="masthead" style="background-image: url('{{.Site.Root}}/bundle/20190302133942.jpg')">
         <div class="overlay"></div>
         {{template "header" .}}
         <div class="container">
@@ -41,8 +41,8 @@
                         {{end}}
                         <span class="tags">
                             {{range .Tags}}<a class="tag" href="{{$.Site.Root}}/tag/{{.}}/index.html">{{.}}</a>{{end}}
-                            <a class="conred" href="{{$.Site.Root}}/{{.Link}}">{{i18n "continue_reading"}}</a>
                         </span>
+                        <a class="conred" href="{{$.Site.Root}}/{{.Link}}">{{i18n "continue_reading"}}</a>
                     </section>
                     
                 </div>
