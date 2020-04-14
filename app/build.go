@@ -72,9 +72,9 @@ func Build() {
 	pageTpl = CompileTpl(filepath.Join(themePath, "page.html"), partialTpl, "page")
 	archiveTpl = CompileTpl(filepath.Join(themePath, "archive.html"), partialTpl, "archive")
 	tagTpl = CompileTpl(filepath.Join(themePath, "tag.html"), partialTpl, "tag")
-	//清除部分模板文件
+	//清除public文件夹中的部分模板文件，
 	publicPath = filepath.Join(rootPath, globalConfig.Build.Output)
-	cleanPatterns := []string{"tag", "*.html", "msic"}
+	cleanPatterns := []string{"tag", "*.html", "msic", "*.xml"}
 	for _, pattern := range cleanPatterns {
 		files, _ := filepath.Glob(filepath.Join(publicPath, pattern))
 		for _, path := range files {
@@ -82,18 +82,18 @@ func Build() {
 			MLog("Cleaning: " + path)
 		}
 	}
-	//查找所有.md以生成文章
+	//查找所有.md文件
 	SymWalk(sourcePath, func(path string, info os.FileInfo, err error) error {
 		fileExt := strings.ToLower(filepath.Ext(path))
 		if fileExt == ".md" {
 			//解析 markdown 文件
 			article := ParseArticle(path)
-			//文章不为空 ，不是草稿， 不是隐藏 就渲染
+			//排除为空 ,草稿，隐藏 的文章
 			if article == nil || article.Draft || article.Hide == true {
 				return nil
 			}
 			MLog("Building: " + article.Title)
-			//创建生成的html文件
+			//创建生成的html文件的目录
 			derectory := filepath.Dir(article.Link)
 			err := os.MkdirAll(filepath.Join(publicPath, derectory), 0777)
 			if err != nil {
@@ -104,10 +104,9 @@ func Build() {
 				pages = append(pages, *article)
 				return nil
 			}
-			//隐藏文章不渲染
-			if article.Hide == false {
-				articles = append(articles, *article)
-			}
+			//把符合条件的文章加入渲染队列
+			articles = append(articles, *article)
+
 			//添加 tag
 			for _, tag := range article.Tags {
 				if _, ok := tagMap[tag]; !ok {
@@ -135,24 +134,49 @@ func Build() {
 	if len(articles) == 0 {
 		MFatal("必须要有一篇文章")
 	}
+	MLog(len(articles))
+	//首页
+	IndexPage(articles)
+	// 生成 Article 页面
+	ArticlePage(articleTpl, articles)
+	// 在首页点击文章标签可以到另一个页面
+	IndexTagPage(articles, tagMap)
+	//生成 archive 页面并绑定数据
+	ArchivePage(articles, archiveMap)
+	//生成Teg 页面
+	TagPage(articles, tagMap)
+	//生成 RSS页面
+	//有点累赘，但源码可读性增强，我是这样认为的，你可以简化
+	RssPage(articles)
+	// 生成其他页面 如auout.html
+	IndependentPage(articleTpl ,pages)
+	Copy()
+	WaitGroup.Wait()
+	endTime := time.Now()
+	usedTime := endTime.Sub(startTime)
+	fmt.Printf("\nBuild completed at public folder (%v)\n", usedTime)
 
+}
+func IndexPage(articles MSort) {
 	sort.Sort(articles)
 	//生成 page 页面
 	WaitGroup.Add(1)
 	go RenderIndexPage("", articles, "")
 
-	// 生成 Article 页面
+}
+func ArticlePage(articleTpl template.Template, articles MSort) {
 	WaitGroup.Add(1)
 	go RenderArticles(articleTpl, articles)
-
-	// 在首页点击文章标签可以到另一个页面
+}
+func IndexTagPage(rticles MSort, tagMap map[string]MSort) {
 	for tagName, articles := range tagMap {
 		sort.Sort(articles)
 		WaitGroup.Add(1)
 		go RenderIndexPage(filepath.Join("tag", tagName), articles, tagName)
 	}
 
-	//生成 archive 页面并绑定数据
+}
+func ArchivePage(articles MSort, archiveMap map[string]MSort) {
 	archives := make(MSort, 0)
 	for year, articleInfo := range archiveMap {
 		sort.Sort(articleInfo)
@@ -170,7 +194,8 @@ func Build() {
 		"I18n":    globalConfig.I18n,
 	}, filepath.Join(publicPath, "archive.html"))
 
-	//	生成Teg 页面 点击tag 转到对应tag的列表页
+}
+func TagPage(articles MSort, tagMap map[string]MSort) {
 	tags := make(MSort, 0)
 	for tagName, tagArticles := range tagMap {
 		articleInfo := make(MSort, 0)
@@ -200,22 +225,15 @@ func Build() {
 		"I18n":  globalConfig.I18n,
 	}, filepath.Join(publicPath, "tag.html"))
 
-	//生成 RSS页面
+}
+func RssPage(articles MSort){
 	WaitGroup.Add(1)
 	go GenerateRss(articles)
-
-	// 生成其他页面 如auout.html
+}
+func IndependentPage(articleTpl template.Template ,pages MSort) {
 	WaitGroup.Add(1)
 	go RenderArticles(articleTpl, pages)
-
-	Copy()
-	WaitGroup.Wait()
-	endTime := time.Now()
-	usedTime := endTime.Sub(startTime)
-	fmt.Printf("\nFinished to build in public folder (%v)\n", usedTime)
-
 }
-
 //连接并编译模板
 func CompileTpl(tplPath string, partialTpl string, name string) template.Template {
 	htmlTpl, err := ioutil.ReadFile(tplPath)

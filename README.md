@@ -32,8 +32,9 @@ hanjinyan@hanjinyan:~/app/src/Meink$ ./Meink run
 ### 命令
     $ ./Meink run      运行博客
     $ ./Meink init     清空public (用于调试)
-    $ ./Meink publish  部署到服务器
+    $ ./Meink relaese  发布版打包到release文件夹
     $ ./Meink new      创建文章
+    $ ./Meink sync     同步文章到服务器
 
 ### 二次开发
 

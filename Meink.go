@@ -10,7 +10,7 @@ import (
 const (
 	appName        = "Meink"
 	appUsage       = "轻量级静态博客构建工具"
-	appVersion     = "1.0.0(bate)"
+	appVersion     = "1.0.1(bate)"
 	appAuthor      = "HanJinyan"
 	appAuthorEmail = "jinyanink@outlook.com"
 )
@@ -41,7 +41,7 @@ func main() {
 			},
 			{
 				Name:  "init",
-				Usage: "清空public文件夹",
+				Usage: "清空public文件夹(用于调试)",
 				Action: func(c *cli.Context) error {
 					app.ParseGlobalConfigForWrap(false)
 					app.CleanPublic()
@@ -50,12 +50,11 @@ func main() {
 				},
 			},
 			{
-				Name:  "publish",
-				Usage: "博客部署服务器",
+				Name:  "release",
+				Usage: "发布版打包到release文件夹",
 				Action: func(c *cli.Context) error {
 					app.ParseGlobalConfigForWrap(false)
-					app.CleanPublic()
-					app.Publish()
+					app.Release()
 					return nil
 				},
 			},
@@ -65,6 +64,18 @@ func main() {
 				Action: func(c *cli.Context) error {
 					app.ParseGlobalConfigForWrap(false)
 					app.NewArticle(c)
+					app.Sync()
+					app.Serve()
+					return nil
+				},
+			},
+			{
+				Name:  "sync",
+				Usage: "同步文章到服务器",
+				Action: func(c *cli.Context) error {
+					app.ParseGlobalConfigForWrap(false)
+					app.Sync()
+					app.Serve()
 					return nil
 				},
 			},

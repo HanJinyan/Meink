@@ -26,5 +26,9 @@ build:
     copy:
         - "source"
     publish: | # 需要自己设定目录
-        scp -r /home/hanjinyan/app/src/Meink/ root@你的服务器ip:/目录
 
+publish:
+  release: |
+    `./release.sh .`
+  sync: |
+    sshpass -p 你的服务器密码 scp -r /home/hanjinyan/app/src/Meink/ root@你的服务器ip:/目录

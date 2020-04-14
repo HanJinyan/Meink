@@ -17,9 +17,14 @@ import (
 type GlobalConfig struct {
 	Site    SiteConfig
 	Build   BuildConfig
+	Publish PublishConfig
 	Authors map[string]AuthorConfig //Author 是一个多层的结构
 	I18n    map[string]string       //I18n 是一个多层的结构
 	Develop bool
+}
+type PublishConfig struct {
+	Release string
+	Sync string
 }
 type SiteConfig struct {
 	Title     string
