@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+{{template "head" .}}
+<script type="text/javascript">
+</script>
+
+<title>{{.Site.Title}}</title>
+<body>
+    <!--导航栏-->
+    <!-- 页面头部 -->
+    <header class="masthead" style="display:block ;background-image: url('{{.Site.Root}}/bundle/img/home-bg.jpg')">
+        <div class="overlay"></div>
+        {{template "header" .}}
+        <div class="container">
+            <div class="row">
+                <div class="col-md mx-auto">
+                    <div class="site-heading">
+                        <span>{{.Site.Subtitle}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- 内容 -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md mx-auto">
+                {{range .Articles}}
+                <div class="article">
+                    <a style="text-decoration:none" href="/{{.Link}}">
+                        <span class="title">{{.Title}}</span>
+
+                        {{if .Top}}<span>[{{i18n "top"}}]</span>{{end}}
+                        {{if .Cover}}<div class="cover" style="background-image:url('{{.Cover}}');"></div>{{end}}
+                        {{if .Preview}}<section class="preview">{{.Preview}}</section> {{end}}
+                    </a>
+                    <section class="info">
+                        {{if .Author.Avatar}} <img class="logo" src="{{.Author.Avatar}}">{{end}}
+                        {{if .Author.Name}}<a class="name"
+                            href="/about.{{.Author.Id}}.html">{{.Author.Name}}</a>{{end}}
+                        {{if .Update}}
+                            <span class="date" data-time="{{.Update}}"> <span class="from"></span></span>
+                            {{else}}
+                            <span class="date" data-time="{{.Date}}"><span class="from"></span></span>
+                            {{end}}
+                        <span class="tags">
+                            {{range .Tags}}<a class="tag" href="{{$.Site.Root}}/tag/{{.}}/index.html">{{.}}</a>{{end}}
+                        </span>
+                        <span>
+                            <a class="conred" href="{{$.Site.Root}}/{{.Link}}">{{i18n "continue_reading"}}</a>
+                        </span>
+                    </section>
+                    
+                </div>
+                {{end}}
+
+                <div class="page-nav">
+                    {{if .Prev}}<a class="prev" href="{{.Site.Root}}/{{.Prev}}">{{i18n "prev_page"}}</a>{{end}}
+                    {{if ne .Total 1}}<span class="nav">{{.Page}} / {{.Total}}</span>{{end}}
+                    {{if .Next}}<a class="next" href="{{.Site.Root}}/{{.Next}}">{{i18n "next_page"}}</a>{{end}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    {{template "footer" .}}
+</body>
+
+</html>

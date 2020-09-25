@@ -1,0 +1,66 @@
+# Copied files to public folder when build
+copy:
+    - bundle
+    - author.png
+    - favicon.ico
+    - robots.txt
+# I18n Support
+language:
+    home:
+        en: HOME
+        zh-cn: 首页
+    archive:
+        en: ARCHIVE
+        zh-cn: 归档
+    tag:
+        en: TAG
+        zh-cn: 标签
+    abo:
+        en: ABOUT
+        zh-cn: 关于
+    articles:
+        en: Articles
+        zh-cn: 篇文章
+    continue_reading:
+        en: Continue reading
+        zh-cn: 继续阅读
+    comment:
+        en: Leave your thoughts......
+        zh-cn: 留下你的想法......
+    prev_page:
+        en: Prev Page
+        zh-cn: ◀ 上一页
+    next_page:
+        en: Next Page
+        zh-cn: 下一页 ▶
+    prev_reading:
+        en: Prev Reading
+        zh-cn: ◀ 上一篇
+    next_reading:
+        en: Next Reading
+        zh-cn: 下一篇 ▶
+    top:
+        en: TOP
+        zh-cn: 置顶
+    update:
+        en: Update
+        zh-cn: 更新于
+    since_year:
+        en: " years ago"
+        zh-cn: 年前
+    since_month:
+        en: " months ago"
+        zh-cn: 个月前
+    since_day:
+        en: " days ago"
+        zh-cn: 天前
+    since_hour:
+        en: " hours ago"
+        zh-cn: 小时前
+    since_minute:
+        en: " minutes ago"
+        zh-cn: 分钟前
+    since_second:
+        en: " seconds ago"
+        zh-cn: 秒前
+

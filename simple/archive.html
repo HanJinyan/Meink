@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+{{template "head" .}}
+<title>{{.Site.Title}} | {{i18n "archive"}}</title>
+<body>
+    <!--导航栏-->
+    <!-- 页面头部 -->
+    <header class="masthead" style="background-image: url('{{.Site.Root}}/bundle/img/home-bg.jpg')">
+        <div class="overlay"></div>
+        {{template "header" .}}
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md mx-auto">
+                    <div class="site-heading">
+                        <span>{{.Site.Subtitle}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md mx-auto">
+                    <div class="archive">
+                        <header class="site">
+                            <span class="title">{{.Site.Title}}</span>
+                            <!--        <h2 class="subtitle">{{.Site.Subtitle}}</h2> -->
+                        </header>
+                        <header class="header">
+                            <span class="title">{{i18n "archive"}} -</span>
+                            <span class="subtitle">{{.Total}} {{i18n "articles"}}</span>
+                        </header>
+                        <ul class="archive-list">
+                            {{range .Archive}}
+                            <li class="archive-item">
+                                <div class="archive-year">{{.Year}}</div>
+                                <ul class="article-list">
+                                    {{range .Articles}}
+                                    <ul class="article-item">
+                                        <span class="date">{{.Date}}</span>
+                                        <a href="{{.Link}}">{{.Title}}</a>
+                                    </ul>
+                                    {{end}}
+                                </ul>
+                            </li>
+                            {{end}}
+                        </ul>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    {{template "footer" .}}
+</body>
+
+</html>

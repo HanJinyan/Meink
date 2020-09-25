@@ -1,0 +1,30 @@
+site:
+  title: "Meink· 轻量级静态博客构建工具"
+  subtitle: "Keep It Simple & Stupid"
+  limit: 5
+  theme: simple
+  language: zh-cn
+  logo: "/favicon.ico"
+  url: "http://www.jinyan.ink"
+  copyright: "你的备案号"
+  email: "你的邮箱"
+  github: "你的Github名称"
+  link: "{year}{month}{day}{hour}{minute}{second}.html"
+
+
+authors:
+  me:
+    name: "Meink"
+    intro: "Meink"
+    avatar: "/author.png"
+
+comment:
+  # Valine评论配置
+  appid: "Valine配置appid"
+  appkey: "Valine配置appkey"
+build:
+    output: "public"
+    source: "source"
+    port: 80
+    copy:
+        - "source"
