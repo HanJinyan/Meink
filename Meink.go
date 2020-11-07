@@ -23,7 +23,7 @@ func main() {
 				Name:  "run",
 				Usage: "运行博客",
 				Action: func(c *cli.Context) error {
-					parse.I18n()
+					parse.SiteConfig()
 					build.Build()
 					tool.Copy()
 					tool.DynamicMonitoringFile()
